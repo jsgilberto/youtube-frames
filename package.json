@@ -1,0 +1,10 @@
+{
+  "name": "youtube-frames",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "jsgilberto <alv.mtz94@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ytdl-core": "^0.20.4"
+  }
+}
