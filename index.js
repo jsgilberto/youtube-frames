@@ -11,13 +11,9 @@
   };
 
   // safely create directory
-  const mkdirSync = function (dirPath) {
-    try {
-      fs.mkdirSync(dirPath);
-    } catch (err) {
-      console.log("DIR EXISTS");
-      if (err.code !== 'EEXIST')
-        throw err;
+  const mkdirSync = function (dir) {
+    if (!fs.existsSync(dir)){
+      fs.mkdirSync(dir);
     }
   };
 
@@ -25,7 +21,7 @@
   $ytvideo.prototype = {
     // Download video from YouTube
     download: function(path){
-      var self = this;
+      const self = this;
       self.path = path || './';
 
       if (self.path !== './' && self.path){
@@ -141,13 +137,3 @@
   g.$ytvideo = g.$yt = $ytvideo;
 
 }(global));
-
-let o = $ytvideo('https://www.youtube.com/watch?v=sDj72zqZakE', 'waffle_falling');
-let p = $ytvideo('https://www.youtube.com/watch?v=3ueqncw103A', 'bread_falling');
-let k = $ytvideo('https://www.youtube.com/watch?v=B7bqAsxee4I', 'person_falling')
-o.download('./images1').toFrames();
-p.download('./images2').toFrames();
-k.download('./images3').toFrames();
-
-
-
