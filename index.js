@@ -78,6 +78,7 @@
       var self = this;
       console.log(self);
       self.convertToFrames(fps, self.prom);
+      return self;
     },
 
     convertToFrames: function(fps, promise) {
