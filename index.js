@@ -1,4 +1,3 @@
-// Immediately Invoked Function Expression
 (function(g){
   var ytdl = require('ytdl-core');
   var fs = require('fs');
@@ -60,69 +59,58 @@
           resolve();
 
         });
-        /* videoWriteStream.on('open', (data) => {
-          console.log(`Downloading ${self.videoName}`);
-        });
-        videoWriteStream.on('error', (err) => {
-          console.log("ERROR!!!!!");
-        });
-        videoWriteStream.on('close', () => {
-          console.log(`Finished downloading ${self.videoName}`);
-          resolve();
-        }); */
       });
       return self;
     },
 
-    toFrames: function(fps){
-      var self = this;
-      console.log(self);
-      self.convertToFrames(fps, self.prom);
-      return self;
-    },
+    toFrames: function(fps, begin, end){
+      begin = begin || '00:00:00';
+      const self = this;
+      self.fps = fps || 1;
 
-    convertToFrames: function(fps, promise) {
-      
-      var self = this;
-      
-      fps = fps || 1
-      if (typeof fps !== 'number') {
+      if (typeof self.fps !== 'number') {
         throw "fps argument must be a number"
       }
       else {
-        String(fps);
+        self.fps = String(self.fps);
       }
-  
+
+      // spawn ffmpeg to get frames from video
       function getFrames(){
+        console.log(`Starting Video Frame Process of ${self.videoName}`);
 
-        console.log(`Video Frame Process of ${self.videoName}`);
-
-        let ffmpegVideoFrameProcess = spawn('ffmpeg', [
+        let ffmpegProcess = spawn('ffmpeg', [
           '-i', `${self.path}/${self.videoName}.mp4`,
+          '-ss', `${begin}`,
           '-f', 'image2',
           '-bt', '20M',
-          '-vf', `fps=${fps}`,
+          '-vf', `fps=${self.fps}`,
           `${self.path}/${self.videoName}%03d.jpg`,
           '-loglevel', 'panic',
           '-nostdin'
         ]);
-        /* ffmpegVideoFrameProcess.stdout.on('data', (data) => {
+
+        ffmpegProcess.stdout.on('data', (data) => {
           console.log(data.toString());
         });
       
-        ffmpegVideoFrameProcess.stderr.on('error', (err) => {
+        ffmpegProcess.stderr.on('error', (err) => {
           console.log(err.toString());
         });
-      
-        ffmpegVideoFrameProcess.stdout.on('close', (data) => {
-          process.exit()
-        }); */
+
+        ffmpegProcess.stdout.on('close', () => {
+          console.log(`Finished Video Frame Process of ${self.videoName}`);
+        });
+      };
+
+      if(self.prom){
+        self.prom.then(getFrames);
+      }
+      else{
+        getFrames();
       }
 
-      if(promise){
-        promise.then(getFrames);
-      }
-      
+      return self;
     }
   };
 
