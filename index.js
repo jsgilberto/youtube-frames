@@ -16,6 +16,9 @@
     }
   };
 
+  const calculateDifference = function(start, end){
+    // TODO
+  };
 
   $ytvideo.prototype = {
     // Download video from YouTube
@@ -64,7 +67,12 @@
     },
 
     toFrames: function(fps, begin, end){
-      begin = begin || '00:00:00';
+      const begin = begin || '00:00:00';
+      
+      if (end){
+        end = calculateDifference(begin, end);
+      }
+
       const self = this;
       self.fps = fps || 1;
 
