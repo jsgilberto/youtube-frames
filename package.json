@@ -6,6 +6,12 @@
     "url": "https://github.com/jsgilberto/youtube-frames.git"
   },
   "version": "1.0.0",
+  "keywords": [
+    "youtube",
+    "download",
+    "getFrames",
+    "easy"
+  ],
   "main": "index.js",
   "author": "jsgilberto <alv.mtz94@gmail.com>",
   "license": "MIT",
