@@ -44,7 +44,12 @@ Returns a simple object with the youtube URL and the given name of the video.
 ### download(path)
 
 Attempts to download a YouTube video (from the url given) and tries to store it in the path specified. If path is not specified, the video is stored in the root path.
-* path: must be a string containing the complete URL of the youtube video.
+* path: must be a string containing the path to the directory where the youtube video is going to be downloaded.
+Examples:
+```js
+.download() // default path: ./
+.download("./dir") // if path doesn't exist, it will create it: ./dir/
+```
 
 ### toFrames(fps, begin, end)
 
@@ -52,3 +57,10 @@ Attempts to get the video frames (as JPEG) and stores them in the same location 
 * fps: must be a number, it specifies the number of frames to get per second. | [fps default value] = 1
 * begin: must be a number (seconds) or string ("00:01:40"). It specifies the starting point to get the frames. | [begin default value] = 0
 * end: must be a number (seconds) or string ("00:00:03"). It specifies the ending point to get the frames. | [end default value] = length of video
+Example:
+```js
+.toFrames(15) // gets 15 frames per second and uses the default values for begin and end
+.toFrames(30, 1, 3) // gets 30 frames per second and starts getting frames beginning from 1 to 3.
+.toFrames(2, "00:00:01", "00:00:03") // gets 2 frames per second and starts getting frames beggining from 1 to 3.
+.toFrames() // gets 1 frame per second for the entire video.
+```
