@@ -6,7 +6,7 @@ Another youtube-video-to-frames module. Inspired by [youtube-video-to-frames](ht
 
 To use this module you need to have Node.js installed in your computer. You can download the latest version [here](https://nodejs.org/en/download/current/). Also this module depends on ffmpeg (assumes ffmpeg is in your $PATH variable), you can download it [here](https://www.ffmpeg.org/download.html).
 
-Once you have Node.js installed. Open your terminal and type the following commands(without the '$' symbol):
+Once you have Node.js and ffmpeg installed (and in your $PATH). Open your terminal and type the following commands(without the '$' symbol):
 ```shell
 $ mkdir name_your_folder  # create a directory
 $ cd name_your_folder     # go into the directory
