@@ -1,5 +1,5 @@
 # youtube-frames
-![YOUTUBE!](https://images.unsplash.com/photo-1521302200778-33500795e128?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=76eea7015abeaeef17af7f17e9581ba5.png)
+![YOUTUBE!](https://images.fastcompany.net/image/upload/w_937,ar_16:9,c_fill,g_auto,f_auto,q_auto,fl_lossy/fc/3020553-poster-youtubeposter.jpg)
 Another youtube-video-to-frames module. Inspired by [youtube-video-to-frames](https://www.npmjs.com/package/youtube-video-to-frames) and powered by [ytdl-core](https://www.npmjs.com/package/ytdl).
 
 # Install
