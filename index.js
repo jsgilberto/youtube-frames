@@ -1,9 +1,9 @@
-(function(g){
+(function (g) {
   var ytdl = require('ytdl-core');
   var fs = require('fs');
   var spawn = require('child_process').spawn;
 
-  const $ytvideo = function(youtubeURL, videoName){
+  const $ytvideo = function (youtubeURL, videoName) {
 
     return new $ytvideo.init(youtubeURL, videoName);
 
@@ -11,52 +11,53 @@
 
   // safely create directory
   const mkdirSync = function (dir) {
-    if (!fs.existsSync(dir)){
+    if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
     }
   };
 
-  const calculateDifference = function(start, end){
-    // TODO
-  };
-
   $ytvideo.prototype = {
     // Download video from YouTube
-    download: function(path){
+    download: function (path) {
       const self = this;
       self.path = path || './';
 
-      if (self.path !== './' && self.path){
+      if (self.path !== './' && self.path) {
         mkdirSync(self.path);
       }
-      
+
       // create a promise
-      self.prom = new Promise(function(resolve){
+      self.prom = new Promise(function (resolve) {
 
         let video = ytdl(self.youtubeURL);
         let vpipe = video.pipe(fs.createWriteStream(`${self.path}/${self.videoName}.mp4`));
-        
-        video.on('progress', function(chunkLength, downloaded, total){
+
+        video.on('progress', function (chunkLength, downloaded, total) {
 
           const floatDownloaded = downloaded / total;
           console.log(`${self.videoName} - Download progress: ${parseFloat(floatDownloaded*100).toFixed(2)} %`);
 
         });
 
-        video.on('error', function(err){
+        video.on('error', function (err) {
 
           console.log("\nThere was an error downloading.\n");
           throw err;
 
         });
 
-        video.on('end', function(){
-
+        video.on('end', function () {
+          
           console.log(`\nFinished downloading: ${self.videoName}\n`);
 
         });
 
-        vpipe.on('finish', function(){
+        video.on('info', function(data){
+          console.log(data.length_seconds);
+          self.length = data.length_seconds;
+        });
+
+        vpipe.on('finish', function () {
 
           console.log(`Finished writing ${self.videoName}.mp4 to disk`);
           resolve();
@@ -66,30 +67,28 @@
       return self;
     },
 
-    toFrames: function(fps, begin, end){
-      const begin = begin || '00:00:00';
-      
-      if (end){
-        end = calculateDifference(begin, end);
-      }
-
+    toFrames: function (fps, begin, end) {
       const self = this;
+      
       self.fps = fps || 1;
 
       if (typeof self.fps !== 'number') {
         throw "fps argument must be a number"
-      }
-      else {
+      } else {
         self.fps = String(self.fps);
       }
 
       // spawn ffmpeg to get frames from video
-      function getFrames(){
+      function getFrames() {
+        begin = begin || 0;
+        end = end || self.length;
         console.log(`Starting Video Frame Process of ${self.videoName}`);
+        console.log(`Taking Frames from: ${begin}, to: ${end}`);
 
         let ffmpegProcess = spawn('ffmpeg', [
           '-i', `${self.path}/${self.videoName}.mp4`,
           '-ss', `${begin}`,
+          '-to', `${end}`,
           '-f', 'image2',
           '-bt', '20M',
           '-vf', `fps=${self.fps}`,
@@ -101,7 +100,7 @@
         ffmpegProcess.stdout.on('data', (data) => {
           console.log(data.toString());
         });
-      
+
         ffmpegProcess.stderr.on('error', (err) => {
           console.log(err.toString());
         });
@@ -111,10 +110,9 @@
         });
       };
 
-      if(self.prom){
+      if (self.prom) {
         self.prom.then(getFrames);
-      }
-      else{
+      } else {
         getFrames();
       }
 
@@ -123,10 +121,11 @@
   };
 
   // this is the object created when you call $ytvideo
-  $ytvideo.init = function(youtubeURL, videoName, path){
+  $ytvideo.init = function (youtubeURL, videoName, path) {
     this.youtubeURL = youtubeURL;
     this.videoName = videoName || 'video';
     this.path = path || './';
+    this.length = 0;
   }
 
   $ytvideo.init.prototype = $ytvideo.prototype;
