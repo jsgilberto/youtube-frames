@@ -1,5 +1,10 @@
 {
   "name": "youtube-frames",
+  "description": "An easy to use API to get the frames from youtube videos.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jsgilberto/youtube-frames.git"
+  },
   "version": "1.0.0",
   "main": "index.js",
   "author": "jsgilberto <alv.mtz94@gmail.com>",
