@@ -6,11 +6,26 @@ Another youtube-video-to-frames module. Inspired by [youtube-video-to-frames](ht
 
 To use this module you need to have Node.js installed in your computer. You can download the latest version [here](https://nodejs.org/en/download/current/).
 
-Once you have Node.js installed, you should be able to verify your Node.js version typing in your terminal the following:
+Once you have Node.js installed, you should be able to verify your Node.js version. Open your terminal and type the following (without the '$' symbol):
 ```shell
-node -v
+$ node -v
 ```
-
+If the command above does not return an error, you are ready to go!
+Now that you have Node.js installed and ready to use, the next step is to clone the repository in a directory of your choice; as an example, I'm going to create a directory called youtube-frames, then I'm going to move inside that directory and clone the repository inside:
+```shell
+$ mkdir youtube-frames
+$ cd youtube-frames
+youtube-frames$ git clone https://github.com/jsgilberto/youtube-frames.git
+```
+After the repository gets cloned in your computer, the next step is to install the dependencies of the project. In order to it, type the following command (npm is a package manager for Node.js, and comes with Node.js):
+```shell
+youtube-frames$ npm install
+```
+Once the dependencies are successfully installed, try running the following command in your terminal:
+```shell
+youtube-frames$ node example.js
+```
+That will run an example of the implementation of the module. The example will create 2 folders called, images1 and images2. Inside those folders you are going to find the youtube videos downloaded and the images of every second of the video.
 
 # Usage
 
