@@ -2,6 +2,16 @@
 
 Another youtube-video-to-frames module. Inspired by [youtube-video-to-frames](https://www.npmjs.com/package/youtube-video-to-frames) and powered by [ytdl-core](https://www.npmjs.com/package/ytdl).
 
+# Install
+
+To use this module you need to have Node.js installed in your computer. You can download the latest version [here](https://nodejs.org/en/download/current/).
+
+Once you have Node.js installed, you should be able to verify your Node.js version typing in your terminal the following:
+```shell
+node -v
+```
+
+
 # Usage
 
 ```js
