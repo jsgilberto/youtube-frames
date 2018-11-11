@@ -1,4 +1,4 @@
-![YOUTUBE!](https://images.fastcompany.net/image/upload/w_937,ar_16:9,c_fill,g_auto,f_auto,q_auto,fl_lossy/fc/3020553-poster-youtubeposter.jpg)
+![YOUTUBE!](https://i.imgur.com/psOzYmD.png)
 # youtube-frames
 Another youtube-video-to-frames module. Inspired by [youtube-video-to-frames](https://www.npmjs.com/package/youtube-video-to-frames) and powered by [ytdl-core](https://www.npmjs.com/package/ytdl).
 
