@@ -1,6 +1,9 @@
-![YOUTUBE!](https://i.imgur.com/psOzYmD.png)
 # youtube-frames
+
 Another youtube-video-to-frames module. Inspired by [youtube-video-to-frames](https://www.npmjs.com/package/youtube-video-to-frames) and powered by [ytdl-core](https://www.npmjs.com/package/ytdl).
+
+![YOUTUBE!](https://i.imgur.com/psOzYmD.png)
+
 
 # Install
 
@@ -14,6 +17,7 @@ $ npm i youtube-frames   # install module inside directory
 ```
 
 # Usage
+
 The following code, will download the video from https://www.youtube.com/watch?v=sDj72zqZakE and name it waffle_falling. Then it's going to get the frames of the downloaded video.
 ```js
 require('youtube-frames');
@@ -23,6 +27,7 @@ o.download().toFrames();
 ```
 
 # API
+
 ## $ytvideo(youtubeURL, videoName)
 
 Returns a simple object with the youtube URL and the given name of the video.
